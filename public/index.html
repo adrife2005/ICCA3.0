@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a0a0a">
+  <!--SEO-->
+  <link rel="preload" href="/fonts/montserrat.woff" as="font" type="font/woff" crossorigin>
+  <link rel="stylesheet" href="/css/site.css">
+</head>
+<body class="page-home">
+  <a class="skip" href="#coleccion">Saltar a la colección</a>
+
+  <!-- Intro tipo cine (solo la primera vez que entras; clic para saltarla) -->
+  <div class="intro" id="intro" hidden>
+    <div class="intro-word" data-cms="site_name">ICCA</div>
+    <div class="intro-bar"></div>
+  </div>
+
+  <!-- Barra roja de progreso al hacer scroll -->
+  <div class="progress" id="progress" aria-hidden="true"></div>
+
+  <!-- Fondo animado: la obra oscurecida moviéndose lento, detrás de toda la página -->
+  <div class="bg-animated" data-cms-bg="bg_image" aria-hidden="true"></div>
+  <div class="bg-overlay" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Barra de navegación -->
+  <header class="topbar" id="topbar">
+    <a class="brand" href="/" id="brand" data-cms="site_name">ICCA</a>
+    <nav class="menu" id="menu" aria-label="Principal">
+      <a href="#inicio" class="active">Inicio</a>
+      <a href="/galeria.html">Galería</a>
+      <a href="#coleccion">Colección</a>
+      <a href="#notas">Secretos</a>
+      <a href="#lienzo">Experiencia</a>
+      <a href="#contacto" class="menu-contact-mobile">Contáctanos</a>
+    </nav>
+    <a href="#contacto" class="btn-outline nav-cta">Contáctanos</a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+  </header>
+
+  <main>
+    <!-- PORTADA -->
+    <section class="hero" id="inicio">
+      <div class="hero-content">
+        <span class="tag" data-cms="hero_tag">OBRA DE ARTE & ATALAYA</span>
+        <h1 class="hero-title">
+          <span class="line"><span data-cms="hero_title_1">EL ARTE ES LA</span></span>
+          <span class="line"><span class="highlight" data-cms="hero_title_2">SOMBRA Y LA LUZ</span></span>
+          <span class="line"><span data-cms="hero_title_3">DE LA MENTE</span></span>
+        </h1>
+        <p class="hero-desc" data-cms="hero_desc">Sumérgete en el universo místico e inmersivo de ICCA.</p>
+        <div class="hero-actions">
+          <a href="/galeria.html" class="btn-primary"><span data-cms="hero_button">Explorar galería</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          <a href="#contacto" class="btn-ghost">Contáctanos</a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="art-card" id="heroCard" data-tilt>
+          <div class="art-glow"></div>
+          <button class="art-frame" id="heroOpen" aria-label="Ver la obra principal en pantalla completa">
+            <img data-cms-img="hero_image" data-sizes="(max-width: 900px) 90vw, 45vw" alt="" fetchpriority="high" draggable="false">
+            <span class="glare" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+
+      <a href="#destacadas" class="scroll-cue" aria-label="Bajar a las obras"><span></span></a>
+    </section>
+
+    <!-- OBRAS DESTACADAS -->
+    <section class="featured" id="destacadas" hidden>
+      <header class="section-head reveal-up">
+        <span class="tag" data-cms="featured_tag">SELECCIÓN EXCLUSIVA</span>
+        <h2 data-cms="featured_title">OBRAS DESTACADAS</h2>
+        <p data-cms="featured_desc"></p>
+      </header>
+      <div class="featured-list" id="featuredList"></div>
+    </section>
+
+    <!-- Franjas cruzadas en movimiento -->
+    <div class="marquee-zone" aria-hidden="true">
+      <div class="strip strip-dark"><div class="marquee-track reverse" data-cms-marquee="marquee_text_2"></div></div>
+      <div class="strip strip-red"><div class="marquee-track" data-cms-marquee="marquee_text"></div></div>
+    </div>
+
+    <!-- COLECCIÓN -->
+    <section class="collection" id="coleccion">
+      <header class="section-head reveal-up">
+        <span class="tag" data-cms="collection_tag">GALERÍA COMPLETA</span>
+        <h2 data-cms="collection_title">LA COLECCIÓN</h2>
+        <p data-cms="collection_desc"></p>
+      </header>
+      <div class="filters reveal-up" id="filters" role="group" aria-label="Filtrar por técnica" hidden></div>
+      <div class="masonry" id="masonry" data-limit="12"></div>
+      <!-- Siempre visible: lleva a la galería interactiva (obras que se pueden mover) -->
+      <p class="collection-more" id="collectionMore">
+        <a class="btn-primary" href="/galeria.html" id="collectionMoreLink">Abrir la galería interactiva ✦</a>
+      </p>
+    </section>
+
+    <!-- SECRETOS Y CONCEPTOS -->
+    <section class="notes" id="notas">
+      <header class="section-head reveal-up">
+        <span class="tag" data-cms="notes_tag">REVELACIONES DEL ARTISTA</span>
+        <h2 data-cms="notes_title">SECRETOS & CONCEPTOS</h2>
+        <p data-cms="notes_desc"></p>
+      </header>
+      <div class="notes-grid" data-cms-notes="notes_cards"></div>
+    </section>
+
+    <!-- LIENZO OCULTO (rasca y descubre) -->
+    <section class="reveal" id="lienzo">
+      <div class="reveal-stage reveal-up">
+        <div class="glass-frame glow-frame">
+          <div class="scratch" id="scratch">
+            <img data-cms-img="exp_image" data-sizes="(max-width: 900px) 90vw, 48vw" alt="Obra oculta" loading="lazy" draggable="false">
+            <canvas id="scratchCanvas" aria-hidden="true"></canvas>
+          </div>
+        </div>
+        <button class="btn-ghost btn-small" id="revealAll" type="button">Descubrir completa</button>
+      </div>
+      <div class="reveal-text reveal-up">
+        <span class="tag" data-cms="exp_tag">EXPERIENCIA TÁCTIL</span>
+        <h2 data-cms="exp_title">EL LIENZO OCULTO</h2>
+        <p data-cms="exp_text_1"></p>
+        <p data-cms="exp_text_2"></p>
+        <dl class="specs">
+          <div><dt>TÉCNICA</dt><dd data-cms="exp_technique"></dd></div>
+          <div><dt>DIMENSIONES</dt><dd data-cms="exp_dimensions"></dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section class="contact" id="contacto">
+      <header class="section-head center reveal-up">
+        <span class="tag" data-cms="contact_tag">CONECTA CON LA ARTISTA</span>
+        <h2 data-cms="contact_title">CONTÁCTANOS</h2>
+        <p data-cms="contact_desc"></p>
+      </header>
+      <div class="contact-grid">
+        <ul class="channels reveal-up">
+          <li><a class="channel" data-cms-href="instagram_url" href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+            <span class="ch-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></span>
+            <span class="ch-text"><small>Instagram</small><strong data-cms="instagram_handle">@icca.art</strong></span><span class="ch-arrow" aria-hidden="true">↗</span></a></li>
+          <li data-cms-hide-empty="whatsapp_number"><a class="channel" data-cms-wa="whatsapp_number" href="#" target="_blank" rel="noopener noreferrer">
+            <span class="ch-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span>
+            <span class="ch-text"><small>WhatsApp directo</small><strong data-cms="whatsapp_display" id="waText"></strong></span><span class="ch-arrow" aria-hidden="true">↗</span></a></li>
+          <li><a class="channel" data-cms-mail="contact_email" href="#">
+            <span class="ch-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+            <span class="ch-text"><small>Correo oficial</small><strong data-cms="contact_email"></strong></span><span class="ch-arrow" aria-hidden="true">↗</span></a></li>
+        </ul>
+
+        <form class="contact-form glass reveal-up" id="contactForm" novalidate>
+          <!-- Trampa para bots: las personas no ven este campo -->
+          <input type="text" name="website" class="honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <div class="form-row">
+            <label><span>Tu nombre</span><input type="text" name="name" required maxlength="80" autocomplete="name" placeholder="Ej. Valeria Mendoza"></label>
+            <label><span>Correo electrónico</span><input type="email" name="email" required maxlength="120" autocomplete="email" placeholder="ejemplo@correo.com"></label>
+          </div>
+          <label><span>Asunto <span class="optional">(opcional)</span></span><input type="text" name="subject" maxlength="120" placeholder="Ej. Adquisición de obra"></label>
+          <label><span>Mensaje</span><textarea name="message" rows="5" required maxlength="3000" placeholder="Escribe tu mensaje aquí…"></textarea></label>
+          <p class="form-error" id="formError" role="alert" hidden></p>
+          <button type="submit" class="btn-primary" id="submitBtn">Enviar mensaje ✦</button>
+          <!-- Se muestra cuando el mensaje se envió bien -->
+          <div class="form-done" id="formDone" hidden>
+            <span class="form-done-icon" aria-hidden="true">✦</span>
+            <h3>¡Mensaje enviado!</h3>
+            <p>Gracias por escribir. Te responderé lo antes posible a tu correo.</p>
+            <button type="button" class="btn-ghost btn-small" id="formAgain">Enviar otro mensaje</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div>
+      <span class="brand" data-cms="site_name">ICCA</span>
+      <p data-cms="footer_copy"></p>
+    </div>
+    <a href="#inicio" class="to-top" aria-label="Volver arriba">↑</a>
+  </footer>
+
+  <!-- Visor de obras en pantalla completa -->
+  <div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Visor de obras" hidden>
+    <div class="viewer-bar">
+      <span class="viewer-count" id="vCount"></span>
+      <div class="viewer-tools">
+        <button type="button" id="vAudio" aria-label="Escuchar audioguía" title="Audioguía">Escuchar</button>
+        <button type="button" id="vInfo" aria-expanded="false" title="Información de la obra (tecla i)">Información</button>
+        <button type="button" id="vShare" title="Copiar enlace a esta obra">Copiar enlace</button>
+        <button type="button" id="vClose" aria-label="Cerrar visor (Esc)">Cerrar</button>
+      </div>
+    </div>
+    <div class="viewer-stage" id="vStage">
+      <img id="vImg" alt="" draggable="false">
+      <button class="viewer-nav prev" id="vPrev" aria-label="Obra anterior"><span aria-hidden="true">‹</span></button>
+      <button class="viewer-nav next" id="vNext" aria-label="Obra siguiente"><span aria-hidden="true">›</span></button>
+      <p class="viewer-hint" id="vHint">Toca la obra para acercarte</p>
+    </div>
+    <div class="viewer-caption">
+      <span class="cartela-title" id="vTitle"></span>
+      <span class="cartela-meta" id="vMeta"></span>
+    </div>
+    <aside class="viewer-info" id="vPanel" hidden>
+      <div class="tabs" role="tablist" id="vTabs"></div>
+      <div class="tab-body" id="vTabBody" role="tabpanel"></div>
+      <p class="viewer-loc" id="vLoc"></p>
+    </aside>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="/cms-data.js"></script>
+  <script src="/js/cms.js"></script>
+  <script src="/js/viewer.js"></script>
+  <script src="/js/home.js"></script>
+</body>
+</html>
